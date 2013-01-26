@@ -1,0 +1,15 @@
+info:
+	name: Theme Name
+	description: Theme Description
+	core: 1.x
+	version: 1.0
+	author: Author Name <chris@quickapps.es>
+
+stylesheets:
+	all: [reset.css, styles.css]
+
+regions:
+	region-name: Region Name
+
+layout: default
+login_layout: login
