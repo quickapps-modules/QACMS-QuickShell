@@ -9,7 +9,7 @@ Then run the `qs` command to start the shell.
 
 ### Example, Windows 7
 
-1. Press `Win+R` keys open the Run dialog. 
+1. Press `Win+R` keys to open the Run dialog. 
 2. Type in `cmd` and press Intro.
 3. A new terminal will show up. Navigate to the path above using `cd` command:
 
