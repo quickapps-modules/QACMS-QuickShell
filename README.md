@@ -3,7 +3,7 @@ Use backend's instalaltion interface as usual. (or install through `Modules Dire
 
 
 # Usage
-Open a new OS terminal and navigate to: `Your_QACMS_Installation/Modules/QuickShell/Cake/Console`.
+Open a new OS terminal and navigate to: `Your_QACMS_Installation/Modules/QuickShell/Console`.
 Then run the `qs` command to start the shell.
 
 
@@ -17,14 +17,14 @@ Then run the `qs` command to start the shell.
 3. A new terminal will show up. Navigate to the path above using `cd` command:
 
 
-        C:\Users\UserName>cd FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Cake\Console
-        C:\FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Cake\Console>
+        C:\Users\UserName>cd FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Console
+        C:\FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Console>
 
 	
 4. Now type in `qs` to start the Shell:
 
 
-        C:\FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Cake\Console>qs
+        C:\FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Console>qs
 
 	
 5. Now you should get something like this:

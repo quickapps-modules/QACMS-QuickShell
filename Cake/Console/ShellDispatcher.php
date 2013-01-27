@@ -137,7 +137,9 @@ class ShellDispatcher {
 
 		App::build(
 			array(
-				'Console' => QS_CONSOLE_PATH . DS
+				'Console' => QS_CONSOLE_PATH . DS,
+				'Console/Command' => QS_CONSOLE_PATH . DS . 'Command' . DS,
+				'Console/Templates' => QS_CONSOLE_PATH . DS . 'Templates' . DS
 			)
 		);
 
