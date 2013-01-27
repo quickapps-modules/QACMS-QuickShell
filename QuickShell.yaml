@@ -1,0 +1,7 @@
+---
+name: Quick Shell
+description: Enables background tasks such as maintenance or modules/themes creation.
+category: Development
+version: 1.0
+core: >1.0
+author: 'Christopher Castro <chris@quickapps.es>'

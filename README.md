@@ -7,21 +7,24 @@ Open a new OS terminal and navigate to: `Your_QACMS_Installation/Modules/QuickSh
 Then run the `qs` command to start the shell.
 
 
-### Example, Windows 7
+**A command-line (CLI) build of PHP must be available on the system if you plan to use the this module's Console.**
+
+
+### Example, Using the Console under Windows 7
 
 1. Press `Win+R` keys to open the Run dialog. 
 2. Type in `cmd` and press Intro.
 3. A new terminal will show up. Navigate to the path above using `cd` command:
 
 
-        C:\Users\UserName>cd FullPath_to_Your_QACMS_Installation/Modules/QuickShell/Console
-        C:\FullPath_to_Your_QACMS_Installation/Modules/QuickShell/Console>
+        C:\Users\UserName>cd FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Console
+        C:\FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Console>
 
 	
 4. Now type in `qs` to start the Shell:
 
 
-        C:\FullPath_to_Your_QACMS_Installation/Modules/QuickShell/Console>qs
+        C:\FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Console>qs
 
 	
 5. Now you should get something like this:
