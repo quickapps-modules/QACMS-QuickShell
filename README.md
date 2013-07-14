@@ -1,9 +1,9 @@
 # Installation
-Use backend's instalaltion interface as usual. (or install through `Modules Directory`, since QACMS v1.1)
+Use backend's instalaltion interface as usual. (or downlaod & install through `Modules Directory`, since QACMS v1.1)
 
 
 # Usage
-Open a new OS terminal and navigate to: `Your_QACMS_Installation/Modules/QuickShell/Console`.
+Open a new OS terminal and navigate to QuickShell module directory: `Your_QACMS_Installation/Modules/QuickShell/`.
 Then run the `qs` command to start the shell.
 
 
@@ -17,14 +17,14 @@ Then run the `qs` command to start the shell.
 3. A new terminal will show up. Navigate to the path above using `cd` command:
 
 
-        C:\Users\UserName>cd FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Console
-        C:\FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Console>
+        C:\Users\UserName>cd FullPath_to_Your_QACMS_Installation\Modules\QuickShell\
+        C:\FullPath_to_Your_QACMS_Installation\Modules\QuickShell>
 
 	
 4. Now type in `qs` to start the Shell:
 
 
-        C:\FullPath_to_Your_QACMS_Installation\Modules\QuickShell\Console>qs
+        C:\FullPath_to_Your_QACMS_Installation\Modules\QuickShell>qs
 
 	
 5. Now you should get something like this:
@@ -43,6 +43,6 @@ Then run the `qs` command to start the shell.
         4. Quit
         What would you like to do (1/2/3/4)
         >
-	
+
 
 Enjoy!

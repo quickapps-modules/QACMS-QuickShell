@@ -1,0 +1,1 @@
+.\Cake\Console\cake QuickShell.begin
