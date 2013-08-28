@@ -1,5 +1,5 @@
 # Installation
-Use backend's instalaltion interface as usual. (or downlaod & install through `Modules Directory`, since QACMS v1.1)
+Use backend's instalaltion interface as usual. (or install through `Modules Directory`, since QACMS v1.1)
 
 
 # Usage
