@@ -19,7 +19,7 @@ class GuiTask extends AppShell {
 			}
 		}
 
-		$in_msg = empty($in_msg) ? __t('What would you like to do') : $in_msg;
+		$in_msg = empty($in_msg) ? __d('quick_shell', 'What would you like to do') : $in_msg;
 		$allowed = range(1, $i);
 
 		if (!empty($mappedOpts)) {
@@ -53,7 +53,7 @@ class GuiTask extends AppShell {
 				$obj->{$action[1]}();
 			}
 		} else {
-			$this->out(__t('You have made an invalid selection.'));
+			$this->out(__d('quick_shell', 'You have made an invalid selection.'));
 		}
 	}
 }

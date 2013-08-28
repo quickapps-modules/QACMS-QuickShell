@@ -7,7 +7,7 @@ class ModuleTask extends AppShell {
 	public $quit = false;
 
 	public function main() {
-		$this->out(__t('Quickapps CMS - Modules'));
+		$this->out(__d('quick_shell', 'Quickapps CMS - Modules'));
 		$this->hr();
 
 		$this->Gui->menu(
@@ -59,7 +59,7 @@ class ModuleTask extends AppShell {
 
 	public function info($type = 'module') {
 		$modules = $this->listModules(true, $type);
-		$opt = $this->in(__t('Which %s ?', $type), range(1, count($modules)));
+		$opt = $this->in(__d('quick_shell', 'Which %s ?', $type), range(1, count($modules)));
 		$module = $modules[$opt-1];
 		$_yaml = $this->readYaml($module['Module']['name']);
 		$yaml = $type == 'theme' ? $_yaml['info'] : $_yaml;
@@ -68,20 +68,20 @@ class ModuleTask extends AppShell {
 		$this->hr();
 		$this->out("{$yaml['name']}{$version}");
 		$this->hr();
-		$this->out(__t('Machine Name: %s', $module['Module']['name']));
-		$this->out(__t('Active: %s',
-			($module['Module']['status'] ? __t('Yes') : __t('No'))
+		$this->out(__d('quick_shell', 'Machine Name: %s', $module['Module']['name']));
+		$this->out(__d('quick_shell', 'Active: %s',
+			($module['Module']['status'] ? __d('quick_shell', 'Yes') : __d('quick_shell', 'No'))
 		));
-		$this->out(__t('Description: %s', $yaml['description']));
+		$this->out(__d('quick_shell', 'Description: %s', $yaml['description']));
 
 		if (isset($yaml['category'])) {
-			$this->out(__t('Category: %s', $yaml['category']));
+			$this->out(__d('quick_shell', 'Category: %s', $yaml['category']));
 		}
 
-		$this->out(__t('Core: %s', $yaml['core']));
+		$this->out(__d('quick_shell', 'Core: %s', $yaml['core']));
 
 		if (isset($yaml['dependencies'])) {
-			$this->out(__t('Dependencies:'));
+			$this->out(__d('quick_shell', 'Dependencies:'));
 
 			foreach ($yaml['dependencies'] as $d) {
 				$this->out("\t- {$d}");
@@ -89,7 +89,7 @@ class ModuleTask extends AppShell {
 		}
 
 		if (isset($_yaml['regions'])) {
-			$this->out(__t('Theme regions:'));
+			$this->out(__d('quick_shell', 'Theme regions:'));
 
 			foreach ($_yaml['regions'] as $alias => $name) {
 				$this->out("\t- {$name} ({$alias})");
@@ -101,7 +101,7 @@ class ModuleTask extends AppShell {
 		$savePath = ROOT . DS . 'webroot' . DS . 'files' . DS;
 
 		if (!is_writable($savePath)) {
-			$this->out(__t('Write permission ERROR: %s', $savePath));
+			$this->out(__d('quick_shell', 'Write permission ERROR: %s', $savePath));
 
 			return;
 		}
@@ -111,7 +111,7 @@ class ModuleTask extends AppShell {
 		$this->hr();
 
 		if ($created = $this->build($savePath, $module)) {
-			$this->out(__t('Your module has been compressed and saved in: %s', $savePath . $module['alias'] . '.zip'));
+			$this->out(__d('quick_shell', 'Your module has been compressed and saved in: %s', $savePath . $module['alias'] . '.zip'));
 		}
 	}
 
@@ -163,7 +163,7 @@ class ModuleTask extends AppShell {
 					foreach ($info['yaml']['regions'] as $id => $name) {
 						$body .= "\n\t\t<?php //if (\$this->Block->regionCount('{$id}')): ?>";
 						$body .= "\n\t\t\t<div class=\"region {$id}\">";
-						$body .= "\n\t\t\t\t<h4 class=\"region-name\">" . __t('Region') .": <span>{$name}</span></h4>";
+						$body .= "\n\t\t\t\t<h4 class=\"region-name\">" . __d('quick_shell', 'Region') .": <span>{$name}</span></h4>";
 						$body .= "\n\t\t\t\t<?php echo \$this->Block->region('{$id}'); ?>";
 						$body .= "\n\t\t\t</div>";
 						$body .= "\n\t\t<?php //endif; ?>\n";
@@ -204,19 +204,19 @@ class ModuleTask extends AppShell {
 				'description' => false,
 				'max_instances' => null
 			);
-			$build = strtolower($this->in(__t('Does your module has any Field ? (Y/N)'))) == 'y';
+			$build = strtolower($this->in(__d('quick_shell', 'Does your module has any Field ? (Y/N)'))) == 'y';
 
 			if ($build) {
 				while (!$field['name']) {
-					$field['name'] = $module_name . Inflector::camelize($this->in(__t('Enter your field name in CamelCase. e.g.: "FieldName" [R]')));
+					$field['name'] = $module_name . Inflector::camelize($this->in(__d('quick_shell', 'Enter your field name in CamelCase. e.g.: "FieldName" [R]')));
 				}
 
 				while (!$field['description']) {
-					$field['description'] = $this->in(__t('Enter a brief description [R]'));
+					$field['description'] = $this->in(__d('quick_shell', 'Enter a brief description [R]'));
 				}
 
 				while ($field['max_instances'] === null) {
-					$field['max_instances'] = $this->in(__t("How many instances of this field can be attached to entities ?\nLeave empty for no limits, or zero (0) to indicate that field can not be attached to entities. [O]"));
+					$field['max_instances'] = $this->in(__d('quick_shell', "How many instances of this field can be attached to entities ?\nLeave empty for no limits, or zero (0) to indicate that field can not be attached to entities. [O]"));
 
 					if (empty($field['max_instances'])) {
 						$field['max_instances'] = false;
@@ -271,37 +271,37 @@ class ModuleTask extends AppShell {
 		$moduleAlias = null;
 
 		while (empty($moduleAlias)) {
-			$moduleAlias = Inflector::camelize($this->in(__t('Alias name of the module, in CamelCase. e.g.: "MyTestModule" [R]')));
+			$moduleAlias = Inflector::camelize($this->in(__d('quick_shell', 'Alias name of the module, in CamelCase. e.g.: "MyTestModule" [R]')));
 		}
 
 		while (empty($yaml['name'])) {
-			$yaml['name'] = $this->in(__t('Human readable name of the module. e.g.: "My Test Module" [R]'));
+			$yaml['name'] = $this->in(__d('quick_shell', 'Human readable name of the module. e.g.: "My Test Module" [R]'));
 		}
 
 		while (empty($yaml['description'])) {
-			$yaml['description'] = $this->in(__t('Brief description [R]'));
+			$yaml['description'] = $this->in(__d('quick_shell', 'Brief description [R]'));
 		}
 
 		while (empty($yaml['category'])) {
-			$yaml['category'] = $this->in(__t('Category [R]'));
+			$yaml['category'] = $this->in(__d('quick_shell', 'Category [R]'));
 
 			if (Inflector::camelize($yaml['category']) == 'Core') {
 				$yaml['category'] = null;
 
-				$this->out(__t('Invalid category name.'));
+				$this->out(__d('quick_shell', 'Invalid category name.'));
 			}
 		}
 
 		while (empty($yaml['version'])) {
-			$yaml['version'] = $this->in(__t('Module version. e.g.: 1.0, 2.0.1 [R]'));
+			$yaml['version'] = $this->in(__d('quick_shell', 'Module version. e.g.: 1.0, 2.0.1 [R]'));
 		}
 
 		while (empty($yaml['core'])) {
-			$yaml['core'] = $this->in(__t('Required version of Quickapps CMS. e.g: 1.x, >=1.0 [R]'));
+			$yaml['core'] = $this->in(__d('quick_shell', 'Required version of Quickapps CMS. e.g: 1.x, >=1.0 [R]'));
 		}
 
-		$authorName = $this->in(__t('Author name [O]'));
-		$authorEmail = $this->in(__t('Author email [O]'));
+		$authorName = $this->in(__d('quick_shell', 'Author name [O]'));
+		$authorEmail = $this->in(__d('quick_shell', 'Author email [O]'));
 		$yaml['author'] = "{$authorName} <{$authorEmail}>";
 
 		if (empty($authorName) && empty($authorEmail)) {
@@ -311,7 +311,7 @@ class ModuleTask extends AppShell {
 		$addDependencies = false;
 
 		while (!in_array($addDependencies, array('Y', 'N'))) {
-			$addDependencies = strtoupper($this->in(__t('Does your module depends of other modules ?'), array('Y', 'N')));
+			$addDependencies = strtoupper($this->in(__d('quick_shell', 'Does your module depends of other modules ?'), array('Y', 'N')));
 		}
 
 		$yaml['dependencies'] = array();
@@ -323,16 +323,16 @@ class ModuleTask extends AppShell {
 			while ($continue) {
 				$dependency = array('name' => null, 'version' => null);
 
-				$this->out(__t('#%s', $i));
+				$this->out(__d('quick_shell', '#%s', $i));
 
 				while (empty($dependency['name'])) {
-					$dependency['name'] = Inflector::camelize($this->in(__t('Module alias')));
+					$dependency['name'] = Inflector::camelize($this->in(__d('quick_shell', 'Module alias')));
 				}
 
-				$dependency['version'] = trim($this->in(__t('Module version. (Optional)')));
+				$dependency['version'] = trim($this->in(__d('quick_shell', 'Module version. (Optional)')));
 
 				while (!in_array($continue, array('Y', 'N'), true)) {
-					$continue = strtoupper($this->in(__t('Add other module dependency ?'), array('Y', 'N')));
+					$continue = strtoupper($this->in(__d('quick_shell', 'Add other module dependency ?'), array('Y', 'N')));
 				}
 
 				$continue = ($continue == 'Y');

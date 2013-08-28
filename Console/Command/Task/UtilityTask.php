@@ -6,7 +6,7 @@ class UtilityTask extends AppShell {
 	public $quit = false;
 
 	public function main() {
-		$this->out(__t('Quickapps CMS - Utilities'));
+		$this->out(__d('quick_shell', 'Quickapps CMS - Utilities'));
 		$this->hr();
 		$this->Gui->menu(
 			$this,
@@ -39,9 +39,9 @@ class UtilityTask extends AppShell {
 			foreach ($files as $file) {
 				$this->out($path . $file);
 				if (@unlink($path . $file)) {
-					$this->out(__t('File removed: %s', $path . $file), 1, Shell::VERBOSE);
+					$this->out(__d('quick_shell', 'File removed: %s', $path . $file), 1, Shell::VERBOSE);
 				} else {
-					$this->out(__t('<error>Error:</error> %s', $path . $file), 1, Shell::VERBOSE);
+					$this->out(__d('quick_shell', '<error>Error:</error> %s', $path . $file), 1, Shell::VERBOSE);
 				}
 			}
 		}
@@ -50,10 +50,10 @@ class UtilityTask extends AppShell {
 	public function password_hash() {
 		App::uses('Security', 'Utility');
 
-		$in = $this->in(__t('Type in your password'));
-		$salt = $this->in(__t('Type in your security salt, or leave empty to use site salt.'));
+		$in = $this->in(__d('quick_shell', 'Type in your password'));
+		$salt = $this->in(__d('quick_shell', 'Type in your security salt, or leave empty to use site salt.'));
 		$salt = empty($salt) ? true : $salt;
-		$out = __t('Hash for "%s": %s', $in, Security::hash($in, null, $salt));
+		$out = __d('quick_shell', 'Hash for "%s": %s', $in, Security::hash($in, null, $salt));
 
 		$this->out("\n\t" . str_repeat('-', strlen($out)) . "\n\t<info>" . $out . "</info>\n\t" . str_repeat('-', strlen($out)) . "\n");
 	}
@@ -77,7 +77,7 @@ class UtilityTask extends AppShell {
 		$options['destination'] = str_replace(DS . DS, DS, $options['destination'] . DS);
 
 		if ($options['datemark']) {
-			$options['destination'] .= date(__t('Y-m-d @ H.i.s')) . ' @ ' . time() . DS;
+			$options['destination'] .= date(__d('quick_shell', 'Y-m-d @ H.i.s')) . ' @ ' . time() . DS;
 		}
 
 		if ($options['schema']) {
@@ -93,12 +93,12 @@ class UtilityTask extends AppShell {
 			}
 
 			if ($Schema->write($content)) {
-				$this->out(__t('Schema file: %s generated', $options['destination'] . 'SchemaBackup.php'));
+				$this->out(__d('quick_shell', 'Schema file: %s generated', $options['destination'] . 'SchemaBackup.php'));
 			}
 		}
 
 		if (empty($options['table'])) {
-			$options['table'] = $this->in(__t('Type in the table name you want to export (no prefix). Leave empty to export all.'));
+			$options['table'] = $this->in(__d('quick_shell', 'Type in the table name you want to export (no prefix). Leave empty to export all.'));
 		}
 
 		if (empty($options['table']) || $options['table'] === '*') {

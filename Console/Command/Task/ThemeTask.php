@@ -7,7 +7,7 @@ class ThemeTask extends AppShell {
 	public $quit = false;
 
 	public function main() {
-		$this->out(__t('Quickapps CMS - Themes'));
+		$this->out(__d('quick_shell', 'Quickapps CMS - Themes'));
 		$this->hr();
 		$this->Gui->menu(
 			$this,
@@ -37,7 +37,7 @@ class ThemeTask extends AppShell {
 		$savePath = ROOT . DS . 'webroot' . DS . 'files' . DS;
 
 		if (!is_writable($savePath)) {
-			$this->out(__t('Write permission ERROR: %s', $savePath));
+			$this->out(__d('quick_shell', 'Write permission ERROR: %s', $savePath));
 
 			return;
 		}
@@ -47,7 +47,7 @@ class ThemeTask extends AppShell {
 		$this->hr();
 
 		if ($created = $this->Module->build($savePath, $theme, 'theme')) {
-			$this->out(__t('Your theme has been compressed and saved in: %s', $savePath . $theme['alias'] . '.zip'));
+			$this->out(__d('quick_shell', 'Your theme has been compressed and saved in: %s', $savePath . $theme['alias'] . '.zip'));
 		}
 	}
 
@@ -69,37 +69,37 @@ class ThemeTask extends AppShell {
 			'login_layout' => 'login'
 		);
 		$themeAlias = null;
-		$yaml['info']['admin'] = strtoupper($this->in(__t('Is your theme an admin theme ?'), array('Y', 'N')));
+		$yaml['info']['admin'] = strtoupper($this->in(__d('quick_shell', 'Is your theme an admin theme ?'), array('Y', 'N')));
 		$yaml['info']['admin'] = ($yaml['info']['admin'] == 'Y');
 
 		while (empty($themeAlias)) {
-			$themeAlias = Inflector::camelize($this->in(__t('Alias name of the theme, in CamelCase. e.g.: "MyTestTheme" [R]')));
+			$themeAlias = Inflector::camelize($this->in(__d('quick_shell', 'Alias name of the theme, in CamelCase. e.g.: "MyTestTheme" [R]')));
 		}
 
 		while (empty($yaml['info']['name'])) {
-			$yaml['info']['name'] = $this->in(__t('Human readable name of the theme. e.g.: "My Test Theme" [R]'));
+			$yaml['info']['name'] = $this->in(__d('quick_shell', 'Human readable name of the theme. e.g.: "My Test Theme" [R]'));
 		}
 
 		while (empty($yaml['info']['description'])) {
-			$yaml['info']['description'] = $this->in(__t('Brief description [R]'));
+			$yaml['info']['description'] = $this->in(__d('quick_shell', 'Brief description [R]'));
 		}
 
-		$yaml['info']['version'] = $this->in(__t('Theme version. e.g.: 1.0, 2.0.1 [O]'));
+		$yaml['info']['version'] = $this->in(__d('quick_shell', 'Theme version. e.g.: 1.0, 2.0.1 [O]'));
 
 		if (empty($yaml['info']['version'])) {
 			unset($yaml['info']['version']);
 		}
 
 		while (empty($yaml['info']['core'])) {
-			$yaml['info']['core'] = $this->in(__t('Required version of Quickapps CMS. e.g: 1.x, >=1.0 [R]'));
+			$yaml['info']['core'] = $this->in(__d('quick_shell', 'Required version of Quickapps CMS. e.g: 1.x, >=1.0 [R]'));
 		}
 
 		while (empty($yaml['info']['description'])) {
-			$yaml['info']['core'] = $this->in(__t('Required version of Quickapps CMS. e.g: 1.x, >=1.0 [R]'));
+			$yaml['info']['core'] = $this->in(__d('quick_shell', 'Required version of Quickapps CMS. e.g: 1.x, >=1.0 [R]'));
 		}
 
-		$authorName = $this->in(__t('Author name [O]'));
-		$authorEmail = $this->in(__t('Author email [O]'));
+		$authorName = $this->in(__d('quick_shell', 'Author name [O]'));
+		$authorEmail = $this->in(__d('quick_shell', 'Author email [O]'));
 		$yaml['info']['author'] = "{$authorName} <{$authorEmail}>";
 
 		if (empty($authorName) && empty($authorEmail)) {
@@ -107,7 +107,7 @@ class ThemeTask extends AppShell {
 		}
 
 		$addDependencies = false;
-		$addDependencies = strtoupper($this->in(__t('Does your theme depends of some modules ?'), array('Y', 'N')));
+		$addDependencies = strtoupper($this->in(__d('quick_shell', 'Does your theme depends of some modules ?'), array('Y', 'N')));
 		$yaml['info']['dependencies'] = array();
 
 		if ($addDependencies == 'Y') {
@@ -117,16 +117,16 @@ class ThemeTask extends AppShell {
 			while ($continue) {
 				$dependency = array('name' => null, 'version' => null);
 
-				$this->out(__t('#%s', $i));
+				$this->out(__d('quick_shell', '#%s', $i));
 
 				while (empty($dependency['name'])) {
-					$dependency['name'] = Inflector::camelize($this->in(__t('Module alias')));
+					$dependency['name'] = Inflector::camelize($this->in(__d('quick_shell', 'Module alias')));
 				}
 
-				$dependency['version'] = trim($this->in(__t('Module version. (Optional)')));
+				$dependency['version'] = trim($this->in(__d('quick_shell', 'Module version. (Optional)')));
 
 				while (!in_array($continue, array('Y', 'N'), true)) {
-					$continue = strtoupper($this->in(__t('Add other module dependency ?'), array('Y', 'N')));
+					$continue = strtoupper($this->in(__d('quick_shell', 'Add other module dependency ?'), array('Y', 'N')));
 				}
 
 				$continue = ($continue == 'Y');
@@ -142,10 +142,10 @@ class ThemeTask extends AppShell {
 
 		$this->nl();
 		$this->hr();
-		$this->out(__t('Adding theme regions'));
+		$this->out(__d('quick_shell', 'Adding theme regions'));
 		$this->hr();
 
-		$importFrom = strtoupper($this->in(__t('Do you want to add regions present in the actual theme?'), array('Y', 'N')));
+		$importFrom = strtoupper($this->in(__d('quick_shell', 'Do you want to add regions present in the actual theme?'), array('Y', 'N')));
 
 		if ($importFrom == 'Y') {
 			$t = $yaml['info']['admin'] ? 'admin' : 'site';
@@ -169,7 +169,7 @@ class ThemeTask extends AppShell {
 
 			if ($i) {
 				$opts = range(1, $i);
-				$import = $this->in(__t('Type in regions separated by comma `,`.'), $opts);
+				$import = $this->in(__d('quick_shell', 'Type in regions separated by comma `,`.'), $opts);
 				$import = preg_replace('/[^0-9,]*/', '', trim($import));
 				$import = explode(',', $import);
 				$import = Hash::filter($import);
@@ -183,20 +183,20 @@ class ThemeTask extends AppShell {
 		}
 
 		if ($importFrom == 'Y') {
-			$addRegion = strtoupper($this->in(__t('Add more regions?'), array('Y', 'N')));
+			$addRegion = strtoupper($this->in(__d('quick_shell', 'Add more regions?'), array('Y', 'N')));
 			$addRegion = ($addRegion == 'Y');
 		} else {
 			$addRegion = true;
 		}
 
 		while ($addRegion) {
-			$region = $this->in(__t('Region name:'));
+			$region = $this->in(__d('quick_shell', 'Region name:'));
 
 			if (!empty($region)) {
 				$yaml['regions'][strtolower(Inflector::slug($region, '-'))] = $region;
 			}
 
-			$addRegion = strtoupper($this->in(__t('Add other region'), array('Y', 'N')));
+			$addRegion = strtoupper($this->in(__d('quick_shell', 'Add other region'), array('Y', 'N')));
 			$addRegion = ($addRegion == 'Y');
 		}
 
