@@ -31,13 +31,71 @@ class UtilityTask extends AppShell {
 			ROOT . DS . 'tmp' . DS . 'cache' . DS . 'persistent' . DS
 		);
 
+		$this->nl();
+		$this->hr();
+		$this->out(__d('quick_shell', 'Cache Cleaner'));
+		$this->hr();
+
+		$this->out(__d('quick_shell', '1. Blocks and menus cache'));
+		$this->out(__d('quick_shell', '2. QuickApps core settings cache'));
+		$this->out(__d('quick_shell', '3. Themes related cache'));
+		$this->out(__d('quick_shell', '4. Back'));
+
+		$type = $this->in(__d('quick_shell', 'Chose an option (1/2/3/4/5), leave in blank for FULL clear.'));
+
+		if ($type == 4) {
+			return;
+		}
+
 		foreach ($paths as $path) {
 			$folder = new Folder($path);
 			$contents = $folder->read();
 			$files = $contents[1];
 
 			foreach ($files as $file) {
+				$continue = false;
+
+				switch ($type) {
+					case 1:
+						if (preg_match('/^(.*)blocks_(.*)/', $file)) {
+							$continue = true;
+						}
+					break;
+
+					case 2:
+						if (
+							preg_match('/^(.*)core_modules$/', $file) ||
+							preg_match('/^(.*)core_themes$/', $file) ||
+							preg_match('/^(.*)hook_objects(.*)/', $file) ||
+							preg_match('/^(.*)modules(.*)/', $file) ||
+							preg_match('/^(.*)variable$/', $file) ||
+							$path == ROOT . DS . 'tmp' . DS . 'cache' . DS . 'models' . DS ||
+							(
+								$path == ROOT . DS . 'tmp' . DS . 'cache' . DS . 'persistent' . DS &&
+								!preg_match('/^(.*)theme_(.*)/', $file)
+							)
+						) {
+							$continue = true;
+						}
+					break;
+
+					case 3:
+						if (preg_match('/^(.*)theme/', $file)) {
+							$continue = true;
+						}
+					break;
+
+					case '':
+						$continue = true;
+					break;
+				}
+
+				if (!$continue) {
+					continue;
+				}
+
 				$this->out($path . $file);
+
 				if (@unlink($path . $file)) {
 					$this->out(__d('quick_shell', 'File removed: %s', $path . $file), 1, Shell::VERBOSE);
 				} else {
