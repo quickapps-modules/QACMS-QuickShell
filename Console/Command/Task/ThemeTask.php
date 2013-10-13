@@ -190,14 +190,14 @@ class ThemeTask extends AppShell {
 		}
 
 		while ($addRegion) {
-			$region = $this->in(__d('quick_shell', 'Region name:'));
+			$region = $this->in(__d('quick_shell', 'Region name (Leave empty for stop adding):'));
+			$region = trim($region);
 
 			if (!empty($region)) {
 				$yaml['regions'][strtolower(Inflector::slug($region, '-'))] = $region;
+			} else {
+				$addRegion = false;
 			}
-
-			$addRegion = strtoupper($this->in(__d('quick_shell', 'Add other region'), array('Y', 'N')));
-			$addRegion = ($addRegion == 'Y');
 		}
 
 		if ($yaml['info']['admin']) {
